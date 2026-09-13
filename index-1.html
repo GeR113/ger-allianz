@@ -33,7 +33,26 @@ async function loadNews() {
   );
 
   const news = await response.json();
-  console.log('Supabase News:', news);
+  const box = document.querySelector('.news');
+
+news.forEach(item => {
+  const article = document.createElement('article');
+
+  const date = document.createElement('time');
+  date.textContent = new Date(item.created_at).toLocaleDateString('de-DE');
+
+  const title = document.createElement('h3');
+  title.textContent = item.title || '';
+
+  const text = document.createElement('p');
+  text.textContent = item.content || '';
+
+  const author = document.createElement('small');
+  author.textContent = item.author ? 'Von ' + item.author : '';
+
+  article.append(date, title, text, author);
+  box.prepend(article);
+});
 }
 
 loadNews();
