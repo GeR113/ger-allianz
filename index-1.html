@@ -19,4 +19,22 @@ let lang='de', selected=Math.min(Math.max(new Date().getDay()-1,0),5);const lang
 function setLang(l){lang=l;document.documentElement.lang=l;document.querySelectorAll('[data-t]').forEach(e=>e.textContent=(T[l][e.dataset.t]||T.de[e.dataset.t]));document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));renderDays()}
 function renderDays(){let d=days.de,wrap=document.querySelector('#days');wrap.innerHTML='';d.forEach((x,i)=>{let b=document.createElement('button');b.className='day '+(i===selected?'active':'');b.innerHTML=`<b>${lang==='de'?x[0]:names[lang][i]}</b><small>${x[1]}</small>`;b.onclick=()=>{selected=i;renderDays()};wrap.appendChild(b)});let x=d[selected];document.querySelector('#taskbox').innerHTML=`<h3>${lang==='de'?x[0]:names[lang][selected]} · ${x[1]}</h3><ul>${x[2].map(v=>`<li>${v}</li>`).join('')}</ul><small>Die detaillierten Aufgaben sind zusätzlich im Originalplan verfügbar.</small>`}
 document.querySelector('#original').onclick=()=>document.querySelector('#modal').classList.add('show');document.querySelector('#close').onclick=()=>document.querySelector('#modal').classList.remove('show');setLang('de');
+  const SUPABASE_URL = 'https://chlpajoeecphzepukkyg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable__HcqTzJK8T8bc9CFIHzpgQ_ABQfFSfQ';
+
+async function loadNews() {
+  const response = await fetch(
+    SUPABASE_URL + '/rest/v1/news?select=*&order=created_at.desc',
+    {
+      headers: {
+        apikey: SUPABASE_KEY
+      }
+    }
+  );
+
+  const news = await response.json();
+  console.log('Supabase News:', news);
+}
+
+loadNews();
 </script></body></html>
