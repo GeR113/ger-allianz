@@ -209,7 +209,7 @@ async function loadNews(){
    if(!res.ok) throw new Error('HTTP '+res.status);
    const rows=await res.json();
    list.innerHTML='';
-   const show=rows.filter(r=>!r.language||r.language===currentLang||(currentLang!=='de'&&r.language==='de'));
+   const show=rows;
    show.forEach(item=>{
      const a=document.createElement('article');a.className='news-item';
      const d=document.createElement('time');d.textContent=item.created_at?new Date(item.created_at).toLocaleDateString():'';
