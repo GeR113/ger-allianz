@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GeR | Germanyf2P | Server 113</title>
+<style>
+:root{
+  --bg:#080a0d;--panel:rgba(16,19,23,.94);--line:#424850;--red:#b92323;
+  --red2:#ed5b42;--gold:#d29a55;--text:#f4f5f6;--muted:#aab1b9;--green:#73c982
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);font-family:Arial,Helvetica,sans-serif;
+  background:
+    linear-gradient(rgba(5,7,9,.68),rgba(5,7,9,.92)),
+    url("ger-background.png") center top/cover fixed no-repeat,#080a0d;
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+.hero{
+  min-height:66vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;
+  border-bottom:2px solid var(--red);
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.12),rgba(0,0,0,.35) 45%,rgba(0,0,0,.92)),
+    url("design-reference.png") center/cover no-repeat;
+}
+.hero-inner{padding:110px 18px 34px}
+.crest{width:104px;height:132px;object-fit:cover;border:3px solid var(--red2);box-shadow:0 0 24px rgba(237,91,66,.3)}
+.kicker{margin-top:15px;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:12px}
+h1{margin:2px 0 0;font-size:clamp(58px,12vw,106px);line-height:.92;text-shadow:0 4px 18px #000}
+.sub{font-size:clamp(20px,5vw,36px);margin-top:10px}
+.tag{margin-top:8px;color:#ddd}
+.langs{position:absolute;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:7px;flex-wrap:wrap;justify-content:center;width:96%;z-index:5}
+.lang{border:1px solid #646b73;background:rgba(9,11,14,.9);color:#fff;padding:9px 12px;border-radius:8px;cursor:pointer}
+.lang.active{border-color:#ff705b;background:#761919}
+nav{position:sticky;top:0;z-index:10;display:flex;overflow-x:auto;background:rgba(7,9,11,.97);border-bottom:1px solid #3a3f45}
+nav a{padding:17px 20px;white-space:nowrap;border-right:1px solid #24282d}
+main{max-width:1120px;margin:auto;padding:22px 14px 70px}
+.section{margin:25px 0;border:1px solid #40464d;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,rgba(18,21,25,.96),rgba(8,10,13,.96));box-shadow:0 14px 36px rgba(0,0,0,.28)}
+.section-head{padding:19px 21px;border-bottom:1px solid #30363b;background:linear-gradient(90deg,rgba(185,35,35,.2),transparent);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.section-head h2{margin:0;font-size:clamp(26px,5vw,38px)}
+.section-head span{color:var(--gold);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.pad{padding:21px}
+.days,.leaders{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;padding:17px}
+.card{border:1px solid #474d54;background:#0b0e11;padding:17px;min-height:150px;position:relative}
+.card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--accent,#b92323)}
+.card h3{margin:8px 0 5px}.card small{color:var(--gold);text-transform:uppercase;letter-spacing:.12em}
+.card ul{padding-left:19px;color:#d0d4d8;line-height:1.45}
+.mon{--accent:#238cd1}.tue{--accent:#d38b27}.wed{--accent:#22a566}.thu{--accent:#ce3444}.fri{--accent:#8a45c9}.sat{--accent:#8c725e}
+.leader{text-align:center;min-height:118px}.rank{font-size:24px;font-weight:bold;color:var(--gold);margin:6px 0 12px}.leader b{font-size:20px}.role{margin-top:6px;color:var(--muted);font-size:13px}
+.news-list{display:grid;gap:13px;padding:17px}
+.news-item{border-left:4px solid var(--red2);border-top:1px solid #3e444a;border-right:1px solid #3e444a;border-bottom:1px solid #3e444a;background:#0b0e11;padding:17px}
+.news-item h3{margin:7px 0}.news-item p{margin:0;color:#d9dde1;line-height:1.48}.news-item time{font-size:13px;color:var(--muted)}.news-item small{display:block;margin-top:9px;color:var(--gold)}
+.status{padding:0 17px 17px;color:var(--muted);font-size:13px}
+.admin-wrap{padding:17px;display:grid;gap:16px}
+.admin-box{border:1px solid #4a5159;background:#0b0e11;padding:18px;border-radius:10px}
+.admin-box h3{margin-top:0}
+.form-grid{display:grid;gap:12px}
+input,textarea,select{
+  width:100%;border:1px solid #515860;background:#11151a;color:#fff;padding:12px;border-radius:8px
+}
+textarea{min-height:130px;resize:vertical}
+.primary{border:1px solid #e1614b;background:#8e1e1e;color:#fff;padding:12px 16px;border-radius:8px;cursor:pointer;font-weight:bold}
+.secondary{border:1px solid #5c646d;background:#171b20;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer}
+.hidden{display:none!important}
+.ok{color:var(--green)}.err{color:#ff8b7a}
+footer{text-align:center;color:#949ca4;padding:28px 16px 48px;border-top:1px solid #2d3237}
+@media(max-width:800px){.days,.leaders{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.days,.leaders{grid-template-columns:1fr}.section{border-radius:10px}.hero{min-height:58vh}.hero-inner{padding-top:125px}}
+</style>
+</head>
+<body>
+<div class="langs">
+  <button class="lang active" data-lang="de">🇩🇪 DE</button>
+  <button class="lang" data-lang="en">🇬🇧 EN</button>
+  <button class="lang" data-lang="fr">🇫🇷 FR</button>
+  <button class="lang" data-lang="ko">🇰🇷 KO</button>
+  <button class="lang" data-lang="ru">🇷🇺 RU</button>
+</div>
+
+<header class="hero" id="home">
+  <div class="hero-inner">
+    <img class="crest" src="ger-wappen.jpg" alt="GeR Wappen">
+    <div class="kicker">Z Route: Redemption · Server 113</div>
+    <h1>GeR</h1>
+    <div class="sub">Germanyf2P</div>
+    <div class="tag" data-i18n="tagline">Gemeinsam stärker. Gemeinsam überleben.</div>
+  </div>
+</header>
+
+<nav>
+  <a href="#home" data-i18n="home">Startseite</a>
+  <a href="#vs" data-i18n="vs">VS Aufgaben</a>
+  <a href="#leaders" data-i18n="leaders">R5 & R4</a>
+  <a href="#news" data-i18n="news">Neuigkeiten</a>
+  <a href="#admin" data-i18n="admin">R4/R5 Admin</a>
+</nav>
+
+<main>
+<section class="section">
+  <div class="section-head"><h2 data-i18n="welcomeTitle">Willkommen bei GeR</h2><span>Alliance Command</span></div>
+  <div class="pad" data-i18n="welcomeText">Unsere Allianz auf Server 113. Wir kämpfen, wachsen und gewinnen gemeinsam.</div>
+</section>
+
+<section class="section" id="vs">
+  <div class="section-head"><h2 data-i18n="vsTitle">Alliance VS · Wochenaufgaben</h2><span>Mission Board</span></div>
+  <div class="days">
+    <article class="card mon"><small data-i18n="monday">Montag</small><h3>Radar-Erkundung</h3><ul><li>Radar-Missionen abschließen</li><li>Kämpferteil verwenden</li><li>Kämpfer-Chip verwenden</li><li>Ausdauer verbrauchen</li><li>Helden-EXP verwenden</li></ul></article>
+    <article class="card tue"><small data-i18n="tuesday">Dienstag</small><h3>Basisentwicklung</h3><ul><li>Bauenergie erhalten</li><li>Bau-Beschleunigungen verwenden</li><li>Überlebende rekrutieren</li><li>UR-Spezialoperation</li><li>UR-Transporter senden</li></ul></article>
+    <article class="card wed"><small data-i18n="wednesday">Mittwoch</small><h3>Forschung</h3><ul><li>Radar-Mission abschließen</li><li>Forschungsdaten verwenden</li><li>Forschungsenergie erhalten</li><li>Forschungsbeschleunigungen</li></ul></article>
+    <article class="card thu"><small data-i18n="thursday">Donnerstag</small><h3>Heldenentwicklung</h3><ul><li>UR-Heldensplitter</li><li>Helden rekrutieren</li><li>Skill-EXP verwenden</li><li>Helden-EXP verwenden</li></ul></article>
+    <article class="card fri"><small data-i18n="friday">Freitag</small><h3>Entwicklung & Training</h3><ul><li>Radar-Mission</li><li>Bau/Forschung/Training beschleunigen</li><li>Soldaten trainieren</li></ul></article>
+    <article class="card sat"><small data-i18n="saturday">Samstag</small><h3>Kampf</h3><ul><li>UR-Transporter</li><li>UR-Spezialoperation</li><li>Heilungs-/Trainingsspeedups</li><li>Gegnerische Einheiten besiegen</li></ul></article>
+  </div>
+</section>
+
+<section class="section" id="leaders">
+  <div class="section-head"><h2 data-i18n="leadersTitle">Allianzführung</h2><span>Command Staff</span></div>
+  <div class="leaders">
+    <article class="card leader"><div class="rank">R5</div><b>petergast</b><div class="role" data-i18n="allianceLeader">Allianzführer</div></article>
+    <article class="card leader"><div class="rank">R4</div><b>CaptainMoe</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>aeness</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>khiaa87</b><div class="role">Rekrutierer</div></article>
+    <article class="card leader"><div class="rank">R4</div><b>PRINGLE</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>May12</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>Nanes</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>Reza80</b></article>
+    <article class="card leader"><div class="rank">R4</div><b>2DIE4Vendetta</b></article>
+  </div>
+</section>
+
+<section class="section" id="news">
+  <div class="section-head"><h2 data-i18n="newsTitle">Neuigkeiten</h2><span>Alliance Broadcast</span></div>
+  <div class="news-list" id="newsList"></div>
+  <div class="status" id="newsStatus">Lade Neuigkeiten…</div>
+</section>
+
+<section class="section" id="admin">
+  <div class="section-head"><h2 data-i18n="adminTitle">R4/R5 Admin</h2><span>Secure Access</span></div>
+  <div class="admin-wrap">
+    <div class="admin-box" id="loginBox">
+      <h3 data-i18n="loginTitle">Anmelden</h3>
+      <div class="form-grid">
+        <input id="email" type="email" autocomplete="username" placeholder="E-Mail">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Passwort">
+        <button class="primary" id="loginBtn" data-i18n="loginBtn">Anmelden</button>
+        <div id="loginMsg"></div>
+      </div>
+    </div>
+
+    <div class="admin-box hidden" id="postBox">
+      <h3 data-i18n="postTitle">Neuigkeit veröffentlichen</h3>
+      <div class="form-grid">
+        <input id="title" maxlength="120" placeholder="Titel">
+        <textarea id="content" maxlength="3000" placeholder="Nachricht"></textarea>
+        <select id="language">
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="ko">한국어</option>
+          <option value="ru">Русский</option>
+        </select>
+        <input id="author" maxlength="60" placeholder="Autor, z. B. khiaa87">
+        <button class="primary" id="publishBtn" data-i18n="publishBtn">Veröffentlichen</button>
+        <button class="secondary" id="logoutBtn" data-i18n="logoutBtn">Abmelden</button>
+        <div id="postMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>GeR · Germanyf2P · Z Route: Redemption · Server 113</footer>
+
+<script>
+const SUPABASE_URL='https://chlpajoeecphzepukkyg.supabase.co';
+const SUPABASE_KEY='sb_publishable__HcqTzJK8T8bc9CFIHzpgQ_ABQfFSfQ';
+let currentLang='de';
+let accessToken=sessionStorage.getItem('ger_access_token')||'';
+
+const tr={
+de:{home:'Startseite',vs:'VS Aufgaben',leaders:'R5 & R4',news:'Neuigkeiten',admin:'R4/R5 Admin',tagline:'Gemeinsam stärker. Gemeinsam überleben.',welcomeTitle:'Willkommen bei GeR',welcomeText:'Unsere Allianz auf Server 113. Wir kämpfen, wachsen und gewinnen gemeinsam.',vsTitle:'Alliance VS · Wochenaufgaben',leadersTitle:'Allianzführung',allianceLeader:'Allianzführer',newsTitle:'Neuigkeiten',adminTitle:'R4/R5 Admin',loginTitle:'Anmelden',loginBtn:'Anmelden',postTitle:'Neuigkeit veröffentlichen',publishBtn:'Veröffentlichen',logoutBtn:'Abmelden',monday:'Montag',tuesday:'Dienstag',wednesday:'Mittwoch',thursday:'Donnerstag',friday:'Freitag',saturday:'Samstag'},
+en:{home:'Home',vs:'VS Tasks',leaders:'R5 & R4',news:'News',admin:'R4/R5 Admin',tagline:'Stronger together. Survive together.',welcomeTitle:'Welcome to GeR',welcomeText:'Our alliance on Server 113. We fight, grow and win together.',vsTitle:'Alliance VS · Weekly Tasks',leadersTitle:'Alliance Leadership',allianceLeader:'Alliance Leader',newsTitle:'News',adminTitle:'R4/R5 Admin',loginTitle:'Sign in',loginBtn:'Sign in',postTitle:'Publish news',publishBtn:'Publish',logoutBtn:'Sign out',monday:'Monday',tuesday:'Tuesday',wednesday:'Wednesday',thursday:'Thursday',friday:'Friday',saturday:'Saturday'},
+fr:{home:'Accueil',vs:'Tâches VS',leaders:'R5 & R4',news:'Actualités',admin:'Admin R4/R5',tagline:'Plus forts ensemble. Survivre ensemble.',welcomeTitle:'Bienvenue chez GeR',welcomeText:'Notre alliance sur le serveur 113. Nous combattons, progressons et gagnons ensemble.',vsTitle:'Alliance VS · Tâches hebdomadaires',leadersTitle:'Direction de l’alliance',allianceLeader:'Chef d’alliance',newsTitle:'Actualités',adminTitle:'Admin R4/R5',loginTitle:'Connexion',loginBtn:'Se connecter',postTitle:'Publier une actualité',publishBtn:'Publier',logoutBtn:'Se déconnecter',monday:'Lundi',tuesday:'Mardi',wednesday:'Mercredi',thursday:'Jeudi',friday:'Vendredi',saturday:'Samedi'},
+ko:{home:'홈',vs:'VS 임무',leaders:'R5 & R4',news:'소식',admin:'R4/R5 관리',tagline:'함께 더 강하게. 함께 생존합니다.',welcomeTitle:'GeR에 오신 것을 환영합니다',welcomeText:'서버 113의 GeR 연맹입니다. 함께 싸우고 성장하며 승리합니다.',vsTitle:'Alliance VS · 주간 임무',leadersTitle:'연맹 지휘부',allianceLeader:'연맹장',newsTitle:'소식',adminTitle:'R4/R5 관리',loginTitle:'로그인',loginBtn:'로그인',postTitle:'소식 게시',publishBtn:'게시',logoutBtn:'로그아웃',monday:'월요일',tuesday:'화요일',wednesday:'수요일',thursday:'목요일',friday:'금요일',saturday:'토요일'},
+ru:{home:'Главная',vs:'Задания VS',leaders:'R5 и R4',news:'Новости',admin:'Админ R4/R5',tagline:'Вместе сильнее. Выживаем вместе.',welcomeTitle:'Добро пожаловать в GeR',welcomeText:'Наш альянс на сервере 113. Мы сражаемся, растём и побеждаем вместе.',vsTitle:'Alliance VS · Задания недели',leadersTitle:'Руководство альянса',allianceLeader:'Лидер альянса',newsTitle:'Новости',adminTitle:'Админ R4/R5',loginTitle:'Вход',loginBtn:'Войти',postTitle:'Опубликовать новость',publishBtn:'Опубликовать',logoutBtn:'Выйти',monday:'Понедельник',tuesday:'Вторник',wednesday:'Среда',thursday:'Четверг',friday:'Пятница',saturday:'Суббота'}
+};
+
+function setLang(lang){
+ currentLang=lang;
+ document.querySelectorAll('[data-i18n]').forEach(el=>{
+   const k=el.dataset.i18n;
+   if(tr[lang]&&tr[lang][k]) el.textContent=tr[lang][k];
+ });
+ document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+ loadNews();
+}
+document.querySelectorAll('.lang').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+async function loadNews(){
+ const list=document.getElementById('newsList');
+ const status=document.getElementById('newsStatus');
+ try{
+   const res=await fetch(SUPABASE_URL+'/rest/v1/news?select=*&order=created_at.desc',{
+     headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}
+   });
+   if(!res.ok) throw new Error('HTTP '+res.status);
+   const rows=await res.json();
+   list.innerHTML='';
+   const show=rows.filter(r=>!r.language||r.language===currentLang||(currentLang!=='de'&&r.language==='de'));
+   show.forEach(item=>{
+     const a=document.createElement('article');a.className='news-item';
+     const d=document.createElement('time');d.textContent=item.created_at?new Date(item.created_at).toLocaleDateString():'';
+     const h=document.createElement('h3');h.textContent=item.title||'';
+     const p=document.createElement('p');p.textContent=item.content||'';
+     a.append(d,h,p);
+     if(item.author){const s=document.createElement('small');s.textContent=(currentLang==='de'?'Von ':'')+item.author;a.append(s);}
+     list.append(a);
+   });
+   status.textContent=show.length?'Live aus dem Allianz-Newsfeed':'Noch keine News in dieser Sprache';
+ }catch(e){
+   status.textContent='Live-News konnten gerade nicht geladen werden.';
+ }
+}
+
+function updateAdmin(){
+ document.getElementById('loginBox').classList.toggle('hidden',!!accessToken);
+ document.getElementById('postBox').classList.toggle('hidden',!accessToken);
+}
+
+async function login(){
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('password').value;
+ const msg=document.getElementById('loginMsg');
+ msg.textContent='Anmeldung läuft…';msg.className='';
+ try{
+   const res=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{
+     method:'POST',
+     headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json'},
+     body:JSON.stringify({email,password})
+   });
+   const data=await res.json();
+   if(!res.ok||!data.access_token) throw new Error(data.error_description||data.msg||'Login fehlgeschlagen');
+   accessToken=data.access_token;
+   sessionStorage.setItem('ger_access_token',accessToken);
+   msg.textContent='';
+   updateAdmin();
+ }catch(e){
+   msg.textContent='Login fehlgeschlagen. E-Mail oder Passwort prüfen.';
+   msg.className='err';
+ }
+}
+
+async function publishNews(){
+ const title=document.getElementById('title').value.trim();
+ const content=document.getElementById('content').value.trim();
+ const language=document.getElementById('language').value;
+ const author=document.getElementById('author').value.trim();
+ const msg=document.getElementById('postMsg');
+
+ if(!title||!content){msg.textContent='Bitte Titel und Nachricht ausfüllen.';msg.className='err';return;}
+ msg.textContent='Wird veröffentlicht…';msg.className='';
+ try{
+   const res=await fetch(SUPABASE_URL+'/rest/v1/news',{
+     method:'POST',
+     headers:{
+       apikey:SUPABASE_KEY,
+       Authorization:'Bearer '+accessToken,
+       'Content-Type':'application/json',
+       Prefer:'return=representation'
+     },
+     body:JSON.stringify({title,content,language,author})
+   });
+   if(res.status===401){accessToken='';sessionStorage.removeItem('ger_access_token');updateAdmin();throw new Error('Sitzung abgelaufen');}
+   if(!res.ok) throw new Error('HTTP '+res.status);
+   document.getElementById('title').value='';
+   document.getElementById('content').value='';
+   msg.textContent='Neuigkeit wurde veröffentlicht.';
+   msg.className='ok';
+   await loadNews();
+ }catch(e){
+   msg.textContent='Veröffentlichen fehlgeschlagen. Bitte erneut anmelden und versuchen.';
+   msg.className='err';
+ }
+}
+
+document.getElementById('loginBtn').addEventListener('click',login);
+document.getElementById('publishBtn').addEventListener('click',publishNews);
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+ accessToken='';sessionStorage.removeItem('ger_access_token');updateAdmin();
+});
+
+updateAdmin();
+loadNews();
+</script>
+</body>
+</html>
